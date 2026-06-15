@@ -44,7 +44,7 @@ export default function Services() {
           {services.map((service, index) => {
             const Icon = service.icon
             return (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all hover:translate-y-[-4px]">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg">
                     <Icon className="w-6 h-6 text-blue-600" />
