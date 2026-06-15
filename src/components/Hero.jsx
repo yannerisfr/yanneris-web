@@ -1,58 +1,64 @@
+import { useEffect, useState } from 'react'
+
 export default function Hero() {
+  const [offset, setOffset] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setOffset(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section id="hero" className="bg-amber-50 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* Left - Text */}
-          <div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-8 text-gray-900 leading-tight">
-              Transforma tu Negocio
-            </h1>
-            
-            <p className="text-xl text-gray-700 mb-12 leading-relaxed">
-              Especialista en Marketing Estratégico, Publicidad Digital, IA y Automatización. He ayudado a 50+ empresas a crecer con estrategias comprobadas.
-            </p>
+    <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Parallax Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop)',
+          transform: `translateY(${offset * 0.5}px)`,
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
 
-            {/* Stats */}
-            <div className="space-y-6 mb-12">
-              <div>
-                <div className="text-4xl font-bold gradient-text mb-1">10+</div>
-                <p className="text-gray-600">Años de Experiencia</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold gradient-text mb-1">50+</div>
-                <p className="text-gray-600">Clientes Satisfechos</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold gradient-text mb-1">300%</div>
-                <p className="text-gray-600">ROI Promedio</p>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#contacto"
-                className="px-8 py-4 bg-gradient-to-r from-rose-400 to-rose-500 text-white rounded-lg hover:from-rose-500 hover:to-rose-600 transition-all font-semibold text-center"
-              >
-                Solicitar Consulta
-              </a>
-              <a
-                href="#portafolio"
-                className="px-8 py-4 border-2 border-rose-400 text-rose-600 rounded-lg hover:bg-rose-50 transition-all font-semibold text-center"
-              >
-                Ver Casos de Éxito
-              </a>
-            </div>
-          </div>
-
-          {/* Right - Image */}
-          <div className="hidden md:flex items-center justify-center">
-            <div className="w-full aspect-square bg-gradient-to-br from-rose-200 to-rose-300 rounded-2xl flex items-center justify-center text-6xl">
-              📊
-            </div>
-          </div>
+      {/* Content */}
+      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+        <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
+          Yanneris Fernández
+        </h1>
+        <p className="text-2xl md:text-3xl font-light mb-8 text-gray-100">
+          Marketing Estratégico & Publicidad Digital
+        </p>
+        <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
+          Transformo negocios con estrategias comprobadas en Marketing, IA y Automatización
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#portafolio"
+            className="px-8 py-4 bg-rose-500 hover:bg-rose-600 text-white rounded-lg font-semibold transition-all"
+          >
+            Ver Trabajos
+          </a>
+          <a
+            href="#contacto"
+            className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-gray-900 rounded-lg font-semibold transition-all"
+          >
+            Contactar
+          </a>
         </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </div>
     </section>
   )
